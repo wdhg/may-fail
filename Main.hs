@@ -36,3 +36,8 @@ safeDiv _ 0
   = Fail "cannot divide by 0"
 safeDiv x y
   = Ok $ x `div` y
+
+-- performs division over a list by folding the dividend
+listDiv :: Integral a => [a] -> MayFail a
+listDiv (x : xs)
+  = foldl (\x y -> x >>= (`safeDiv` y)) (Ok x) xs
