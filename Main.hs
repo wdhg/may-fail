@@ -20,3 +20,13 @@ instance Applicative MayFail where
     = Fail message
   Ok func <*> Ok value
     = Ok $ func value
+
+instance Monad MayFail where
+  Fail message >>= func
+    = Fail message
+  Ok value >>= func
+    = case result of
+        ok@(Ok _) -> ok
+        fail      -> fail
+      where
+        result = func value
