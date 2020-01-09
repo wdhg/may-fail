@@ -30,3 +30,9 @@ instance Monad MayFail where
         fail      -> fail
       where
         result = func value
+
+safeDiv :: Integral a => a -> a -> MayFail a
+safeDiv _ 0
+  = Fail "cannot divide by 0"
+safeDiv x y
+  = Ok $ x `div` y
