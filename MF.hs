@@ -23,8 +23,4 @@ instance Monad MayFail where
   Fail message >>= func
     = Fail message
   Ok value >>= func
-    = case result of
-        ok@(Ok _) -> ok
-        fail      -> fail
-      where
-        result = func value
+    = func value
