@@ -6,8 +6,8 @@ data MayFail a
     deriving (Show)
 
 instance Functor MayFail where
-  fmap func (Ok result)
-    = Ok $ func result
+  fmap func (Ok value)
+    = Ok $ func value
   fmap _ (Fail message)
     = Fail message
 
